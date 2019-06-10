@@ -27,16 +27,13 @@ export default class Movie extends Component {
       } );
   };
 
-  /* componentWillReceiveProps is being depracated.  Refactoring to
-     componentDidUpdate
-   */
   // Uncomment this code when you're ready for the stretch problems
-  // componentWillReceiveProps(newProps){
-  //   console.log(newProps);
-  //   if(this.props.route.match.params.id !== newProps.match.params.id){
-  //     this.fetchMovie(newProps.match.params.id);
-  //   }
-  // }
+  componentWillReceiveProps(newProps){
+    console.log(newProps);
+    if(this.props.route.match.params.id !== newProps.route.match.params.id){
+      this.fetchMovie(newProps.route.match.params.id);
+    }
+  }
 
 
   saveMovie = () => {
