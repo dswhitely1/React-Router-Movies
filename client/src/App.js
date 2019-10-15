@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   Route,
   withRouter
@@ -7,31 +7,19 @@ import SavedList from './Movies/SavedList';
 import MovieList from './Movies/MovieList';
 import Movie from './Movies/Movie';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      savedList: []
-    };
-  }
+function App() {
+  const [state, setState] = useState([]);
 
-  addToSavedList = movie => {
-    const savedList = this.state.savedList;
-    savedList.push( movie );
-    this.setState( {savedList} );
-  };
-
-  render() {
+  const addToSavedList = movie => setState([...state, movie]);
     return (
       <>
-        <SavedList list={this.state.savedList} />
+        <SavedList list={state} />
         <Route exact path='/' component={MovieList} />
         <Route path='/movies/:id'
-               render={props => <Movie addToSavedList={this.addToSavedList}
+               render={props => <Movie addToSavedList={addToSavedList}
                                        route={props} />} />
       </>
     );
-  }
 }
 
 export default withRouter( App );
